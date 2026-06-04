@@ -1,0 +1,51 @@
+# ============================================
+# ARCHIVO: application.yaml
+# Ubicación: src/main/resources/application.yaml
+# ============================================
+
+server:
+  port: 8080
+
+spring:
+  # Configuración de la base de datos MySQL
+  datasource:
+    url: jdbc:mysql://localhost:3306/sistema_rh?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: My01sql()
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # Configuración de JPA/Hibernate
+  jpa:
+    hibernate:
+      ddl-auto: update  # Opciones: create, create-drop, update, validate, none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+# Configuración de logging (opcional)
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+
+# ============================================
+# NOTAS IMPORTANTES:
+# ============================================
+# 1. Cambia 'password:' por tu contraseña de MySQL
+#    Ejemplo: password: micontraseña123
+#
+# 2. Si tu usuario no es 'root', cambia 'username:'
+#    Ejemplo: username: miusuario
+#
+# 3. ddl-auto: update creará las tablas automáticamente
+#    - create: Crea las tablas cada vez (borra datos)
+#    - update: Actualiza la estructura sin borrar datos
+#    - validate: Solo valida que las tablas existan
+#    - none: No hace nada automáticamente
